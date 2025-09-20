@@ -9,6 +9,7 @@ public class StoredItemsBean {
 	private String s_id;
 	private Timestamp stored_date;
 	private Timestamp expire_date;
+	
 	public String getItem_id() {
 		return item_id;
 	}

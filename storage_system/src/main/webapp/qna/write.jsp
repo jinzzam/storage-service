@@ -1,0 +1,113 @@
+<%@page import="qna.QnaBean"%>
+<%@page import="qna.QnaDBBean"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.sql.Timestamp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	
+	String pageNum=request.getParameter("pageNum");
+	String writer_id = request.getParameter("id");
+	
+	int q_id=0, q_ref=0, q_step=0, q_level=0;
+	String q_title="", q_name="", q_pwd="";
+	String email="";
+	
+	QnaDBBean db = QnaDBBean.getInstance(); 
+	QnaBean qna = db.getQna(q_id);
+
+	
+	//답변글(show.jsp 에서 글번호를 가지고 옴)
+	if(request.getParameter("q_id") != null){	//casting 오류를 막기 위함
+		q_id = Integer.parseInt(request.getParameter("q_id")) ;	
+		q_ref = q_id;
+	}
+	
+	if(qna != null){	//답변글이라면
+// 		db에 insert 하기 위한 로직
+		qna.setQ_ref(q_ref);
+		q_step = qna.getQ_step();
+		q_level = qna.getQ_level();
+		q_title = qna.getQ_title();
+		q_pwd = qna.getQ_pwd();
+	}
+	q_name = db.getWriterName(writer_id);
+	email = db.getWriterEmail(writer_id);
+	
+%>
+<!-- select b_id, b_name, b_email, b_title, b_content, b_date, b_hit, b_pwd, b_ip from boardT where b_id=? -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="board.js"></script>
+</head>
+<body>
+	<center>
+		<h1>글 올 리 기</h1><br>
+		<form method="post" action="write_ok.jsp" name="write_frm" enctype="multipart/form-data">
+<!-- 			화면에 없는 것을 전달할 때 hidden 사용 -->
+			<input type="hidden" name="q_id" value="<%= q_id %>">
+			<input type="hidden" name="q_ref" value="<%= q_ref %>">
+			<input type="hidden" name="q_step" value="<%= q_step %>">
+			<input type="hidden" name="q_level" value="<%= q_level %>">
+			<input type="hidden" name="writer_id" value="<%= writer_id %>">
+			<table>
+				<tr height="30">
+					<td width="80">작성자</td>
+					<td width="140">
+<!-- 					maxlength : 화면 단에서 데이터베이스 오류를 미리 방지 -->
+						<%= q_name %>
+					</td>
+					
+				</tr>
+				<tr height="30">
+					<td width="80">글제목</td>
+					<td width="460" colspan="3">
+<!-- 						<input type="text" name="b_title" size="55" maxlength="80"> -->
+						<%
+							//[답변]: 의 존재 여부
+							if(q_id == 0){ //신규글
+								%>
+								<input type="text" name="q_title" size="55" maxlength="80">
+								<%
+							}else{	//답변글
+								%>
+								<input type="text" name="q_title" size="55" maxlength="80" value="[답변]:<%= q_title %>">
+								<%
+							}
+						%>
+					</td>
+				</tr>
+				<tr height="30">
+					<td colspan="3">
+						파&nbsp;&nbsp;일&nbsp;&nbsp;<input type="file" name="fileName" size="40" maxlength="100">
+					</td>
+				</tr>
+				<tr height="30">
+					<td colspan="4">
+						<textarea name="q_content" cols="65" rows="10" style="﻿overflow-y:scroll; overflow-x:hidden;"></textarea>
+					</td>
+				</tr>
+				<tr height="30">
+					<td colspan="2">
+						암&nbsp;&nbsp;호&nbsp;&nbsp;<input type="password" name="pwd" size="12" maxlength="12">
+<!-- 					maxlength: 컬럼의 크기와 맞추기 -->
+					</td>
+				</tr>
+				<tr height="50" align="center">
+					<td colspan="4">
+						<input type="submit" value="글쓰기" onclick="check_ok()">&nbsp;
+						<input type="reset" value="다시 작성">&nbsp;
+						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+</body>
+</html>

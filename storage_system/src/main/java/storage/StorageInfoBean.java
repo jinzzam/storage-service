@@ -3,10 +3,18 @@ package storage;
 public class StorageInfoBean {
 	private String s_id;
 	private String m_id;
+	private String s_name;
 	private String s_max;
 	private String s_address;
 	private String company_id;
 	
+	
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
 	public String getS_id() {
 		return s_id;
 	}

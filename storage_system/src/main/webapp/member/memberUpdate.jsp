@@ -57,7 +57,7 @@ request.setCharacterEncoding("UTF-8");
 					%>
 					<tr>
 						<td height="30">직장 코드</td>
-						<td width="80"><input type="text" name="company" size="20"></td>
+						<td width="80"><input type="text" name="company" size="20" value="<%= member.getCompany() %>"></td>
 					</tr>
 					<%
 				}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
@@ -29,13 +30,14 @@ public class QnaDBBean {
 		int ref = qna.getQ_ref();
 		int step = qna.getQ_step();
 		int level = qna.getQ_level();
+		String writer_id = qna.getWriter_id();
 		
 		int re = -1; // insert 정상적으로 실행되면 1
 //		글번호 최대값+1을 구함 : null 일 때는 1, 아니면 +1
 		String selectIdSql = "select max(q_id) from QNA";
 		String insertSql = "insert into QNA(q_id, q_type, writer_id, q_title, q_content, q_date, q_pwd, q_ref, q_step, q_level"
 				              + ", fileName, fileRealName, fileSize)"
-							   + " values((select max(b_id)+1 from QNA),?,?,?,?,?,?,?,?,?,?,?,?)";
+							   + " values((select max(q_id)+1 from QNA),?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			conn = getConnection();
@@ -68,7 +70,7 @@ public class QnaDBBean {
 			
 			pstmt = conn.prepareStatement(insertSql);
 			pstmt.setString(1, qna.getQ_type());
-			pstmt.setString(2, qna.getWriter_id());
+			pstmt.setString(2, writer_id);
 			pstmt.setString(3, qna.getQ_title());
 			pstmt.setString(4, qna.getQ_content());
 			pstmt.setTimestamp(5, qna.getQ_date());
@@ -97,7 +99,6 @@ public class QnaDBBean {
 	public ArrayList<QnaBean> qnaList(String pageNumber){
 		Connection conn = null;
 		Statement stmt = null;
-//		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		//페이지에 관련된 결과값 받기 위한 참조변수
@@ -156,7 +157,8 @@ public class QnaDBBean {
 					qna.setWriter_id(rs.getString(3));
 					qna.setQ_title(rs.getString(4));
 					qna.setQ_content(rs.getString(5));
-					qna.setQ_date(rs.getTimestamp(6));
+					Timestamp q_date_from_db=rs.getTimestamp(6);
+					qna.setQ_date(q_date_from_db);
 					qna.setQ_pwd(rs.getString(7));
 					qna.setQ_ref(rs.getInt(8));
 					qna.setQ_step(rs.getInt(9));
@@ -360,4 +362,65 @@ public class QnaDBBean {
 		return qna;
 	}
 	
+	public String getWriterName(String writer_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		String name="";
+		
+		try {
+			conn = getConnection();
+			sql = "select m_name from memberT where m_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writer_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				name = rs.getString("m_name");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return name;
+	}
+	
+	public String getWriterEmail(String writer_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		String email="";
+		
+		try {
+			conn = getConnection();
+			sql = "select email from memberT where m_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writer_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				email = rs.getString("email");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return email;
+	}
 }
