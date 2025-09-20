@@ -1,20 +1,19 @@
 package member;
 
 public class MemberBean {
-	private String id;
+	private String m_id;
 	private String pwd;
-	private String name;
+	private String m_name;
 	private String email;
 	private String address;
 	private String phone;
-	private String type;
+	private String m_type;
 	private String company;
-	
-	public String getId() {
-		return id;
+	public String getM_id() {
+		return m_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 	public String getPwd() {
 		return pwd;
@@ -22,11 +21,11 @@ public class MemberBean {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getName() {
-		return name;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public String getEmail() {
 		return email;
@@ -46,11 +45,11 @@ public class MemberBean {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getType() {
-		return type;
+	public String getM_type() {
+		return m_type;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setM_type(String m_type) {
+		this.m_type = m_type;
 	}
 	public String getCompany() {
 		return company;
@@ -58,6 +57,7 @@ public class MemberBean {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	
 	
 	
 }

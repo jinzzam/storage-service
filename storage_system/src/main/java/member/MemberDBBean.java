@@ -28,20 +28,20 @@ public class MemberDBBean {
 		PreparedStatement pstmt = null;
 		int re = -1;
 		
-		String insertSql="insert into member(id, pwd, name, email, address, phone, type, company) values(?,?,?,?,?,?,?,?)";
+		String insertSql="insert into memberT(m_id, pwd, m_name, email, address, phone, m_type, company) values(?,?,?,?,?,?,?,?)";
 		
 		try {
 //			dbcp 기법의 연결 객체
 			conn = getConnection();
 			pstmt = conn.prepareStatement(insertSql);
 			
-			pstmt.setString(1, member.getId());
+			pstmt.setString(1, member.getM_id());
 			pstmt.setString(2, member.getPwd());
-			pstmt.setString(3, member.getName());
+			pstmt.setString(3, member.getM_name());
 			pstmt.setString(4, member.getEmail());
 			pstmt.setString(5, member.getAddress());
 			pstmt.setString(6, member.getPhone());
-			pstmt.setString(7, member.getType());
+			pstmt.setString(7, member.getM_type());
 			pstmt.setString(8, member.getCompany());
 //			INSERT 문은 executeUpdate 메소드 호출
 			re = pstmt.executeUpdate();
@@ -64,7 +64,7 @@ public class MemberDBBean {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		int re=-1;//초기값 -1
-		String sql="update member set pwd=?, email=?, phone=?, address=?, type=?, company=? where id=?";
+		String sql="update memberT set pwd=?, email=?, phone=?, address=?, m_type=?, company=? where m_id=?";
 		
 		try {
 //			dbcp 기법의 연결 객체
@@ -75,9 +75,9 @@ public class MemberDBBean {
 			pstmt.setString(2, member.getEmail());
 			pstmt.setString(3, member.getPhone());
 			pstmt.setString(4, member.getAddress());
-			pstmt.setString(5, member.getType());
+			pstmt.setString(5, member.getM_type());
 			pstmt.setString(6, member.getCompany());
-			pstmt.setString(7, member.getId());
+			pstmt.setString(7, member.getM_id());
 			re = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,7 +99,7 @@ public class MemberDBBean {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int re = -1;//초기값 -1, 아이디가 중복되면 1
-		String sql="select id from member where id=?";
+		String sql="select m_id from memberT where m_id=?";
 	
 		try {
 			conn = getConnection();
@@ -128,12 +128,12 @@ public class MemberDBBean {
 	
 //	사용자 인증시 사용하는 메소드
 	public int userCheck(String id, String pwd) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int re=-1;//초기값 -1, 비밀번호가 일치하면 1, 비밀번호가 불일치하면 0
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int re = -1;//초기값 -1, 비밀번호가 일치하면 1, 비밀번호가 불일치하면 0
 		String db_mem_pwd="";
-		String sql="select pwd from member where id=?";
+		String sql="select pwd from memberT where m_id=?";
 		
 		try {
 			conn = getConnection();
@@ -142,7 +142,7 @@ public class MemberDBBean {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {//아이디가 일치하는 로우 존재
-				db_mem_pwd = rs.getString(1);
+				db_mem_pwd = rs.getString("pwd");
 				if (db_mem_pwd.equals(pwd)) {//패스워드도  일치
 					re = 1;
 				} else {//패스워드가 불일치
@@ -167,12 +167,11 @@ public class MemberDBBean {
 	
 //	아이디가 일치하는 멤버의 정보를 얻어오는 메소드
 	public MemberBean getMember(String id) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs=null;
-		int re = -1;//초기값 -1
-		String sql="select * from member where id=?";
-		MemberBean member=null;
+		String sql="select m_id, pwd, m_name, email, address, phone, m_type, company from memberT where m_id=?";
+		MemberBean member = null;
 		
 		try {
 			conn = getConnection();
@@ -180,21 +179,18 @@ public class MemberDBBean {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
-			if (re == 1) {//아이디가 일치하는 로우 존재
+			if (rs.next()) {//아이디가 일치하는 로우 존재
 				member = new MemberBean();
 				
-				member.setId(rs.getString(1));
-				member.setPwd(rs.getString(2));
-				member.setName(rs.getString(3));
-				member.setEmail(rs.getString(4));
-				member.setAddress(rs.getString(5));
-				member.setPhone(rs.getString(6));
-				member.setType(rs.getString(7));
-				member.setCompany(rs.getString(8));
-				re = 1;
-			} else {//해당 아이디가 존재하지 않음
-				re = -1;
-			}
+				member.setM_id(rs.getString("m_id"));
+				member.setPwd(rs.getString("pwd"));
+				member.setM_name(rs.getString("m_name"));
+				member.setEmail(rs.getString("email"));
+				member.setAddress(rs.getString("address"));
+				member.setPhone(rs.getString("phone"));
+				member.setM_type(rs.getString("m_type"));
+				member.setCompany(rs.getString("company"));
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

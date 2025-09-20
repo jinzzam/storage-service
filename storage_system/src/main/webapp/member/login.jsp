@@ -8,21 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 	<table width="300" border="1" align="center">
-		<form method="post" action="loginOk.jsp">	
+		<form method="post" action="loginOk.jsp" name="login_frm">	
 			<tr>
 				<td align="center">사용자 ID</td>
-				<td><input type="text" name="id" size="20"></td>
+				<td><input type="text" name="m_id" size="20" required="required"></td>
 			</tr>
 			<tr>
 				<td align="center">비밀번호</td>
-				<td><input type="password" name="pwd" size="20"></td>
+				<td><input type="password" name="pwd" size="20" required="required"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="로그인">
+					<input type="submit" value="로그인" onclick="check_login()">
 					<input type="button" onclick="location='register.jsp'" value="회원가입">
 				</td>
 			</tr>

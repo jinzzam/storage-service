@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<td height="30">User ID</td>
-				<td width="80"><input type="text" name="id" required="required" size="20" min="4" max="10">*</td>
+				<td width="80"><input type="text" name="m_id" required="required" size="20" min="4" max="10">*</td>
 			</tr>
 			<tr>
 				<td height="30">암호</td>
@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td height="30">이 름</td>
-				<td width="80"><input type="text" name="name" required="required" size="20">*</td>
+				<td width="80"><input type="text" name="m_name" required="required" size="20">*</td>
 			</tr>
 			<tr>
 				<td height="30">E-mail</td>
@@ -51,9 +51,9 @@
 			<tr>
 				<td height="30">회원 유형</td>
 				<td width="80">
-					<label><input type="radio" name="type" value="client">일반 회원</label>
-					<label><input type="radio" name="type" value="delivery">배송 직원</label>
-					<label><input type="radio" name="type" value="manager">공간 관리자</label>
+					<label><input type="radio" name="m_type" value="client">일반 회원</label>
+					<label><input type="radio" name="m_type" value="delivery">배송 직원</label>
+					<label><input type="radio" name="m_type" value="manager">공간 관리자</label>
 				</td>
 			</tr>
 

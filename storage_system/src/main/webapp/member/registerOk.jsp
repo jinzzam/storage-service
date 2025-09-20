@@ -13,7 +13,7 @@
 
 
 <%
-	int re = db.confirmID(member.getId());
+	int re = db.confirmID(member.getM_id());
 	
 	if(re == 1){
 		%>

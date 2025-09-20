@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("cur_id");
 	MemberDBBean db = MemberDBBean.getInstance();
 	MemberBean member = db.getMember(id);
-	String type = member.getType();
+	String type = member.getM_type();
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +41,7 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 			<tr>
 				<td height="30">이 름</td>
-				<td width="80"><%= member.getName() %></td>
+				<td width="80"><%= member.getM_name() %></td>
 			</tr>
 			<tr>
 				<td height="30">E-mail</td>
