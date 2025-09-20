@@ -1,14 +1,16 @@
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
 <%
-// 	System.out.println("@#$@#$session.getAttribute(\"mem_uid\") : " + session.getAttribute("mem_uid"));
-	String uid = (String) session.getAttribute("mem_uid");
-	MemberDBBean manager = MemberDBBean.getInstance();
-	MemberBean member = manager.getMember(uid);
-	System.out.println("memberUpdate : member : " + member);
+	String id = (String) session.getAttribute("cur_id");
+	MemberDBBean db = MemberDBBean.getInstance();
+	MemberBean member = db.getMember(id);
+	String type = db.confirmTypeOfMember(id);
+	session.setAttribute("type", type);
 %>
 <!DOCTYPE html>
 <html>
@@ -28,23 +30,23 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 			<tr>
 				<td height="30">User ID</td>
-				<td width="80" size="20"><%= uid %></td>
+				<td width="80" size="20"><%= id %></td>
 			</tr>
 			<tr>
 				<td height="30">암호</td>
-				<td width="80"><input type="password" name="mem_pwd" required="required" size="20">*</td>
+				<td width="80"><input type="password" name="mem_pwd" required="required" size="20" min="4" max="20">*</td>
 			</tr>
 			<tr>
 				<td height="30">암호 확인</td>
-				<td width="80"><input type="password" name="mem_pwd2" required="required" size="20">*</td>
+				<td width="80"><input type="password" name="mem_pwd2" required="required" size="20" min="4" max="20">*</td>
 			</tr>
 			<tr>
 				<td height="30">이 름</td>
-				<td width="80" size="20"><%= member.getMem_name()%></td>
+				<td width="80"><%= member.getU_name() %></td>
 			</tr>
 			<tr>
 				<td height="30">E-mail</td>
-				<td width="80"><input type="text" name="mem_email" required="required" size="20" value="<%= member.getMem_email()%>"></td>
+				<td width="80"><input type="email" name="mem_email" size="30" max="30">*</td>
 			</tr>
 			<tr>
 				<td height="30">연락처</td>
@@ -52,28 +54,23 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 			<tr>
 				<td height="30">회원 주소</td>
-				<td width="80"><input type="text" name="mem_address" required="required" size="20" value="<%= member.getMem_address()%>"></td>
+				<td width="80"><input type="text" name="mem_address" size="20" value="<%= member.getU_address() %>"></td>
 			</tr>
 			<tr>
 				<td height="30">회원 유형</td>
-				<td width="80">
-					<input type="radio" name="mem_type" value="일반 회원">일반 회원
-					<input type="radio" name="mem_type" value="배송 직원">배송 직원
-					<input type="radio" name="mem_type" value="공간 관리자">공간 관리자
-				</td>
+				<td width="80"><%= type %></td>
 			</tr>
-			<tr>
-				<td height="30">직원 직책</td>
-				<td width="80">
-					<input type="radio" name="emp_type" value="사장">사장
-					<input type="radio" name="emp_type" value="부장">부장
-					<input type="radio" name="emp_type" value="과장">과장
-					<input type="radio" name="emp_type" value="대리">대리
-					<input type="radio" name="emp_type" value="사원">사원
-					<input type="radio" name="emp_type" value="기타">기타
-					<input type="text" name="emp_etc_type" size="25" placeholder="직책을 입력하세요.">
-				</td>
-			</tr>
+			<%
+				if(type.equals("delivery") || type.equals("manager")){
+					%>
+					<tr>
+						<td height="30">직장 코드</td>
+						<td width="80"><input type="text" name="code_company" size="20"></td>
+					</tr>
+					<%
+				}
+			%>
+			
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" value="수정" onclick="update_check_ok()"> 

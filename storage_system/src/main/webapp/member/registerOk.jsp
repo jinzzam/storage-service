@@ -1,30 +1,35 @@
-<%@page import="magic.member.MemberDBBean02"%>
+<%@page import="member.ClientBean"%>
+<%@page import="member.MemberDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean class="magic.member.MemberBean" id="mb"></jsp:useBean>
-<jsp:setProperty property="*" name="mb"></jsp:setProperty>
+<jsp:useBean class="member.MemberBean" id="member"></jsp:useBean>
+<jsp:useBean class="member.ClientBean" id="Cmember"></jsp:useBean>
+<jsp:useBean class="member.DeliveryBean" id="Dmember"></jsp:useBean>
+<jsp:useBean class="member.ManagerBean" id="Mmember"></jsp:useBean>
+<jsp:setProperty property="*" name="member"></jsp:setProperty>
 
-<%!MemberDBBean02 manager = MemberDBBean02.getInstance();%>
-	<%
-// 		mb.setMem_uid(request.getParameter(mb.getMem_uid()));
-// 		mb.setMem_pwd(request.getParameter(mb.getMem_pwd()));
-// 		mb.setMem_name(request.getParameter(mb.getMem_name()));
-// 		mb.setMem_email(request.getParameter(mb.getMem_email()));
-// 		mb.setMem_address(request.getParameter(mb.getMem_address()));
-		
-		if(manager.confirmID(mb.getMem_uid()) == 1){
+
+<%
+	MemberDBBean db = MemberDBBean.getInstance();
+	String memberType = request.getParameter("mem_type");
+	int re = -1;
+	
+		if(db.confirmID(member.getU_id()) == 1){
 			%>
 			<script>
 			alert("중복되는 아이디가 존재합니다.");	
 			history.back();	//바로 직전 화면으로
 			</script>
 			<%
-			
 		}else{
-			int re = manager.insertMember(mb);
+			
+			if(memberType.equals("client")) { re = db.insertClient(Cmember); }
+			if(memberType.equals("delivery")) { re = db.insertDelivery(Dmember); }
+			if(memberType.equals("manager")) { re = db.insertManager(Mmember); }
+			
 			if(re == 1){
 				%>
 				<script>

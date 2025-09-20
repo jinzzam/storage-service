@@ -21,19 +21,49 @@ public class MemberDBBean {
 		return ((DataSource) (new InitialContext().lookup("java:comp/env/jdbc/oracle"))).getConnection();
 	}
 	
-	public String confirmTypeOfMember(MemberBean member) {
+	public String confirmTypeOfMember(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		String type="";
-		/*
-		if(member.getU_class().equals("일반 회원")) {
-			ClientBean client = new ClientBean(member);
-			type="client";
-		}else if(member.getU_class().equals("배송 직원")) {
-			DeliveryBean delivery = new DeliveryBean(member);
-			type="delivery";
-		}else if(member.getU_class().equals("공간 관리자")) {
-			ManagerBean manager = new ManagerBean(member);
-			type="manager";
-		}*/
+		int cre = -1;
+		int dre = -1;
+		int mre = -1;
+		
+		try {
+			conn = getConnection();
+			
+			String ClientSql = "select c_id from mem_client where c_id=?";
+			pstmt = conn.prepareStatement(ClientSql);
+			pstmt.setString(1, id);
+			cre = pstmt.executeUpdate();
+			
+			String DeliverySql = "select d_id from mem_delivery where d_id=?";
+			pstmt = conn.prepareStatement(DeliverySql);
+			pstmt.setString(1, id);
+			dre = pstmt.executeUpdate();
+			
+			String ManagerSql = "select m_id from mem_manager where m_id=?";
+			pstmt = conn.prepareStatement(ManagerSql);
+			pstmt.setString(1, id);
+			mre = pstmt.executeUpdate();
+			
+			
+			if(cre == 1) { type="client"; }
+			if(dre == 1) { type="delivry"; }
+			if(mre == 1) { type="manager"; }
+			
+			return type;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return type;
 	}
 	
@@ -121,6 +151,100 @@ public class MemberDBBean {
 			pstmt.setString(6, manager.getU_phone());
 			pstmt.setString(7, manager.getM_company());
 //			INSERT 문은 executeUpdate 메소드 호출
+			re = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return re;
+	}
+	
+	
+	public int updateMember(ClientBean member) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		int re=-1;//초기값 -1
+		String sql="update mem_client set c_pwd=?, c_email=?, c_phone=?, c_address=? where c_id=?";
+		
+		try {
+//			dbcp 기법의 연결 객체
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getU_pwd());
+			pstmt.setString(2, member.getU_email());
+			pstmt.setString(3, member.getU_phone());
+			pstmt.setString(4, member.getU_address());
+			pstmt.setString(5, member.getU_id());
+			re = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return re;
+	}
+	public int updateMember(DeliveryBean member) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		int re=-1;//초기값 -1
+		String sql="update mem_delivery set d_pwd=?, d_email=?, d_phone=?, d_address=? d_company=? where d_id=?";
+		
+		try {
+//			dbcp 기법의 연결 객체
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getU_pwd());
+			pstmt.setString(2, member.getU_email());
+			pstmt.setString(3, member.getU_phone());
+			pstmt.setString(4, member.getU_address());
+			pstmt.setString(5, member.getD_company());
+			pstmt.setString(6, member.getU_id());
+			re = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return re;
+	}
+	public int updateMember(ManagerBean member) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		int re=-1;//초기값 -1
+		String sql="update mem_manager set m_pwd=?, m_email=?, m_phone=?, m_address=?, m_company=? where m_id=?";
+		
+		try {
+//			dbcp 기법의 연결 객체
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getU_pwd());
+			pstmt.setString(2, member.getU_email());
+			pstmt.setString(3, member.getU_phone());
+			pstmt.setString(4, member.getU_address());
+			pstmt.setString(5, member.getM_company());
+			pstmt.setString(6, member.getU_id());
 			re = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,11 +2,6 @@
  * 
  */
 
-//var mem_uid = document.getElementById("mem_uid");
-//var mem_pwd = document.getElementById("mem_pwd");
-//var mem_pwd2 = document.getElementById("mem_pwd2");
-//var mem_name = document.getElementById("mem_name");
-//var mem_email = document.getElementById("mem_email");
 
 function check_ok(){
 	if(reg_frm.mem_uid.value == "") {
@@ -19,8 +14,8 @@ function check_ok(){
 		reg_frm.mem_uid.focus();
 		return;	
 	}
-	if(reg_frm.mem_pwd.value.length == 0) {
-		alert("패스워드는 반드시 입력해야 합니다.");
+	if(reg_frm.mem_pwd.value.length < 4) {
+		alert("패스워드는 4글자 이상이어야 합니다.");
 		reg_frm.mem_pwd.focus();
 		return;	
 	}
@@ -37,6 +32,16 @@ function check_ok(){
 	if(reg_frm.mem_email.value.length == 0) {
 		alert("Email을 써주세요.");
 		reg_frm.mem_email.focus();
+		return;	
+	}
+	if(reg_frm.mem_phone.value.length == 0) {
+		alert("연락처를 써주세요.");
+		reg_frm.mem_phone.focus();
+		return;	
+	}
+	if(reg_frm.mem_address.value.length == 0) {
+		alert("주소를 써주세요.");
+		reg_frm.mem_address.focus();
 		return;	
 	}
 	
@@ -57,20 +62,7 @@ function update_check_ok(){
 			modi_frm.mem_pwd2.focus();
 			return;	
 	}
-	if(modi_frm.mem_email.value.length == 0) {
-			alert("Email을 써주세요.");
-			modi_frm.mem_email.focus();
-			return;	
-	}
+	
 	document.modi_frm.submit();
 }	
 	
-	
-//	if(mem_uid == null)	;
-//	else if(length(mem_uid) < 4)	alert("아이디는 4글자 이상이어야 합니다.");
-//	else if(mem_pwd == null)	alert("패스워드는 반드시 입력해야 합니다.");
-//	else if(mem_pwd != mem_pwd2)	alert("패스워드가 일치하지 않습니다.");
-//	else if(mem_name == null)	alert("이름을 써주세요.");
-//	else if(mem_email == null)	alert("Email을 써주세요.");
-//	else alert("회원 가입을 축하드립니다.");
-//};
