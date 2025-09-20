@@ -5,6 +5,7 @@ public class DeliveryMatchingBean {
 	private String c_id;
 	private String item_id;
 	private String delivery_type;
+	
 	public String getD_id() {
 		return d_id;
 	}

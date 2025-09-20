@@ -3,12 +3,14 @@ package relationship;
 public class PaymentBean {
 	private String c_id;
 	private String s_id;
+	private String company_id;
 	private String item_id;
-	private String p_basicprice;
-	private String p_periodprice;
-	private String p_deliveryprice;
-	private String p_totalprice;
-	private String p_depositstatus;
+	private String p_basic_price;
+	private String p_period_price;
+	private String p_delivery_price;
+	private String p_total_price;
+	private String p_deposit_status;
+	
 	public String getC_id() {
 		return c_id;
 	}
@@ -21,41 +23,49 @@ public class PaymentBean {
 	public void setS_id(String s_id) {
 		this.s_id = s_id;
 	}
+	public String getCompany_id() {
+		return company_id;
+	}
+	public void setCompany_id(String company_id) {
+		this.company_id = company_id;
+	}
 	public String getItem_id() {
 		return item_id;
 	}
 	public void setItem_id(String item_id) {
 		this.item_id = item_id;
 	}
-	public String getP_basicprice() {
-		return p_basicprice;
+	public String getP_basic_price() {
+		return p_basic_price;
 	}
-	public void setP_basicprice(String p_basicprice) {
-		this.p_basicprice = p_basicprice;
+	public void setP_basic_price(String p_basic_price) {
+		this.p_basic_price = p_basic_price;
 	}
-	public String getP_periodprice() {
-		return p_periodprice;
+	public String getP_period_price() {
+		return p_period_price;
 	}
-	public void setP_periodprice(String p_periodprice) {
-		this.p_periodprice = p_periodprice;
+	public void setP_period_price(String p_period_price) {
+		this.p_period_price = p_period_price;
 	}
-	public String getP_deliveryprice() {
-		return p_deliveryprice;
+	public String getP_delivery_price() {
+		return p_delivery_price;
 	}
-	public void setP_deliveryprice(String p_deliveryprice) {
-		this.p_deliveryprice = p_deliveryprice;
+	public void setP_delivery_price(String p_delivery_price) {
+		this.p_delivery_price = p_delivery_price;
 	}
-	public String getP_totalprice() {
-		return p_totalprice;
+	public String getP_total_price() {
+		return p_total_price;
 	}
-	public void setP_totalprice(String p_totalprice) {
-		this.p_totalprice = p_totalprice;
+	public void setP_total_price(String p_total_price) {
+		this.p_total_price = p_total_price;
 	}
-	public String getP_depositstatus() {
-		return p_depositstatus;
+	public String getP_deposit_status() {
+		return p_deposit_status;
 	}
-	public void setP_depositstatus(String p_depositstatus) {
-		this.p_depositstatus = p_depositstatus;
+	public void setP_deposit_status(String p_deposit_status) {
+		this.p_deposit_status = p_deposit_status;
 	}
+	
+	
 	
 }

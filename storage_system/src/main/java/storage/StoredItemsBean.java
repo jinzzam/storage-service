@@ -1,12 +1,14 @@
 package storage;
 
+import java.sql.Timestamp;
+
 public class StoredItemsBean {
 	private String item_id;
 	private String item_name;
-	private String item_weight;
+	private int item_weight;
 	private String s_id;
-	private String stored_date;
-	private String expire_date;
+	private Timestamp stored_date;
+	private Timestamp expire_date;
 	public String getItem_id() {
 		return item_id;
 	}
@@ -19,10 +21,10 @@ public class StoredItemsBean {
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
 	}
-	public String getItem_weight() {
+	public int getItem_weight() {
 		return item_weight;
 	}
-	public void setItem_weight(String item_weight) {
+	public void setItem_weight(int item_weight) {
 		this.item_weight = item_weight;
 	}
 	public String getS_id() {
@@ -31,17 +33,19 @@ public class StoredItemsBean {
 	public void setS_id(String s_id) {
 		this.s_id = s_id;
 	}
-	public String getStored_date() {
+	public Timestamp getStored_date() {
 		return stored_date;
 	}
-	public void setStored_date(String stored_date) {
+	public void setStored_date(Timestamp stored_date) {
 		this.stored_date = stored_date;
 	}
-	public String getExpire_date() {
+	public Timestamp getExpire_date() {
 		return expire_date;
 	}
-	public void setExpire_date(String expire_date) {
+	public void setExpire_date(Timestamp expire_date) {
 		this.expire_date = expire_date;
 	}
+	
+	
 	
 }

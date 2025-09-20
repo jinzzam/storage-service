@@ -3,9 +3,10 @@ package storage;
 public class StorageInfoBean {
 	private String s_id;
 	private String m_id;
-	private String s_type;
 	private String s_max;
 	private String s_address;
+	private String company_id;
+	
 	public String getS_id() {
 		return s_id;
 	}
@@ -18,12 +19,6 @@ public class StorageInfoBean {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public String getS_type() {
-		return s_type;
-	}
-	public void setS_type(String s_type) {
-		this.s_type = s_type;
-	}
 	public String getS_max() {
 		return s_max;
 	}
@@ -35,6 +30,12 @@ public class StorageInfoBean {
 	}
 	public void setS_address(String s_address) {
 		this.s_address = s_address;
+	}
+	public String getCompany_id() {
+		return company_id;
+	}
+	public void setCompany_id(String company_id) {
+		this.company_id = company_id;
 	}
 	
 }
