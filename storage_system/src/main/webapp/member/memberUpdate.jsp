@@ -9,8 +9,7 @@ request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("cur_id");
 	MemberDBBean db = MemberDBBean.getInstance();
 	MemberBean member = db.getMember(id);
-	String type = db.confirmTypeOfMember(id);
-	session.setAttribute("type", type);
+	String type = member.getType();
 %>
 <!DOCTYPE html>
 <html>
@@ -34,27 +33,27 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 			<tr>
 				<td height="30">암호</td>
-				<td width="80"><input type="password" name="mem_pwd" required="required" size="20" min="4" max="20">*</td>
+				<td width="80"><input type="password" name="pwd" required="required" size="20" min="4" max="20">*</td>
 			</tr>
 			<tr>
 				<td height="30">암호 확인</td>
-				<td width="80"><input type="password" name="mem_pwd2" required="required" size="20" min="4" max="20">*</td>
+				<td width="80"><input type="password" name="pwd2" required="required" size="20" min="4" max="20">*</td>
 			</tr>
 			<tr>
 				<td height="30">이 름</td>
-				<td width="80"><%= member.getU_name() %></td>
+				<td width="80"><%= member.getName() %></td>
 			</tr>
 			<tr>
 				<td height="30">E-mail</td>
-				<td width="80"><input type="email" name="mem_email" size="30" max="30">*</td>
+				<td width="80"><input type="email" name="email" size="30" max="30">*</td>
 			</tr>
 			<tr>
 				<td height="30">연락처</td>
-				<td width="80"><input type="text" name="mem_phone" max="13" size="40" placeholder="010-XXXX-XXXX 형태로 작성해주세요."></td>
+				<td width="80"><input type="text" name="phone" max="13" size="40" placeholder="010-XXXX-XXXX 형태로 작성해주세요."></td>
 			</tr>
 			<tr>
 				<td height="30">회원 주소</td>
-				<td width="80"><input type="text" name="mem_address" size="20" value="<%= member.getU_address() %>"></td>
+				<td width="80"><input type="text" name="address" size="20" value="<%= member.getAddress() %>"></td>
 			</tr>
 			<tr>
 				<td height="30">회원 유형</td>
@@ -65,7 +64,7 @@ request.setCharacterEncoding("UTF-8");
 					%>
 					<tr>
 						<td height="30">직장 코드</td>
-						<td width="80"><input type="text" name="code_company" size="20"></td>
+						<td width="80"><input type="text" name="company" size="20"></td>
 					</tr>
 					<%
 				}

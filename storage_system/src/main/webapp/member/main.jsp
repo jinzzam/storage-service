@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	if(session.getAttribute("mem_uid") == null){
+	if(session.getAttribute("cur_id") == null){
 		%>
 			<jsp:forward page="login.jsp"></jsp:forward>
 		<%
 	}
 %>
 <%
-	String uid = (String) session.getAttribute("mem_uid");
-	String name = (String) session.getAttribute("mem_name");
+	String id = (String) session.getAttribute("cur_id");
+	String name = (String) session.getAttribute("cur_name");
 %>
 <html>
 <head>
@@ -20,7 +20,7 @@
 	<table>
 		<form method="post" action="logout.jsp" name="main_frm">
 			<tr>
-				안녕하세요. <%= name %>(<%= uid %>)님
+				안녕하세요. <%= name %>(id : <%= id %>)님
 			</tr>
 			<tr>
 				<td align="center">

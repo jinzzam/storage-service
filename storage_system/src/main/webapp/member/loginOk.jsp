@@ -7,8 +7,8 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <%
-	String id = (String)request.getParameter("mem_uid");
-	String pwd = (String)request.getParameter("mem_pwd");
+	String id = (String)request.getParameter("id");
+	String pwd = (String)request.getParameter("pwd");
 	
 	MemberDBBean db = MemberDBBean.getInstance();
 	int check = db.userCheck(id, pwd);
@@ -25,7 +25,7 @@ request.setCharacterEncoding("UTF-8");
 			</script>
 			<%
 		}else{
-			String name = member.getU_name();
+			String name = member.getName();
 			
 			if(check == 1) { //세션에 사용자 정보 추가 후 main.jsp로 이동
 				session.setAttribute("cur_id", id);

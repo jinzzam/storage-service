@@ -14,11 +14,11 @@
 		<form method="post" action="loginOk.jsp">	
 			<tr>
 				<td align="center">사용자 ID</td>
-				<td><input type="text" name="mem_uid" size="20"></td>
+				<td><input type="text" name="id" size="20"></td>
 			</tr>
 			<tr>
 				<td align="center">비밀번호</td>
-				<td><input type="password" name="mem_pwd" size="20"></td>
+				<td><input type="password" name="pwd" size="20"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
