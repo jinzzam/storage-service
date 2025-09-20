@@ -162,6 +162,9 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
+      <Context docBase="storage_system" path="/storage_system" reloadable="true" source="org.eclipse.jst.jee.server:storage_system">
+      	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/oracle" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:xe" username="scott"/>
+      </Context>
       </Host>
     </Engine>
   </Service>
