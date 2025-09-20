@@ -1,7 +1,4 @@
 <%-- <%@page import="javax.websocket.Session"%> --%>
-<%@page import="magic.member.MemberDBBean"%>
-<%@page import="magic.member.MemberBean"%>
-<%@page import="magic.member.MemberDBBean02"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
