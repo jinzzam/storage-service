@@ -6,8 +6,8 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <%
-	String id = (String) session.getAttribute("cur_id");
 	MemberDBBean db = MemberDBBean.getInstance();
+	String id = request.getParameter("id");
 	MemberBean member = db.getMember(id);
 	String type = member.getM_type();
 %>
@@ -20,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<table width="500" border="1">
-		<form method="post" name="modi_frm" action="memberUpdateOk.jsp">
+		<form method="post" name="modi_frm" action="memberUpdateOk.jsp?id=<%= member.getM_id() %>">
 			<tr>
 				<td colspan="2" align="center">
 					<h2>회원 정보 수정</h2>
@@ -32,24 +32,17 @@ request.setCharacterEncoding("UTF-8");
 				<td width="80" size="20"><%= id %></td>
 			</tr>
 			<tr>
-				<td height="30">암호</td>
-				<td width="80"><input type="password" name="pwd" required="required" size="20" min="4" max="20">*</td>
-			</tr>
-			<tr>
-				<td height="30">암호 확인</td>
-				<td width="80"><input type="password" name="pwd2" required="required" size="20" min="4" max="20">*</td>
-			</tr>
-			<tr>
 				<td height="30">이 름</td>
-				<td width="80"><%= member.getM_name() %></td>
+				<td width="80"><input type="text" name="m_name"  size="20" min="4" max="20" value="<%= member.getM_name() %>">
+				</td>
 			</tr>
 			<tr>
 				<td height="30">E-mail</td>
-				<td width="80"><input type="email" name="email" size="30" max="30">*</td>
+				<td width="80"><input type="email" name="email" size="30" max="30" value="<%= member.getEmail() %>"></td>
 			</tr>
 			<tr>
 				<td height="30">연락처</td>
-				<td width="80"><input type="text" name="phone" max="13" size="40" placeholder="010-XXXX-XXXX 형태로 작성해주세요."></td>
+				<td width="80"><input type="text" name="phone" max="13" size="30" placeholder="010-XXXX-XXXX" value="<%= member.getPhone()%>"></td>
 			</tr>
 			<tr>
 				<td height="30">회원 주소</td>
@@ -72,9 +65,9 @@ request.setCharacterEncoding("UTF-8");
 			
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="수정" onclick="update_check_ok()"> 
+					<input type="submit" value="수정"> 
 					<input type="reset" value="다시입력">
-					<input type="button" value="돌아가기" onclick="location.href='main.jsp'">
+					<input type="button" value="돌아가기" onclick="location.href='main.jsp?id=<%= id %>'">
 				</td>
 			</tr>
 		</form>

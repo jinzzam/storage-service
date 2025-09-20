@@ -64,21 +64,24 @@ public class MemberDBBean {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		int re=-1;//초기값 -1
-		String sql="update memberT set pwd=?, email=?, phone=?, address=?, m_type=?, company=? where m_id=?";
+		String sql="update memberT set pwd=?, m_name=?, email=?, address=?, phone=?, m_type=?, company=? where m_id=?";
 		
 		try {
 //			dbcp 기법의 연결 객체
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
+			System.out.println(member.getM_id());
 			pstmt.setString(1, member.getPwd());
-			pstmt.setString(2, member.getEmail());
-			pstmt.setString(3, member.getPhone());
+			pstmt.setString(2, member.getM_name());
+			pstmt.setString(3, member.getEmail());
 			pstmt.setString(4, member.getAddress());
-			pstmt.setString(5, member.getM_type());
-			pstmt.setString(6, member.getCompany());
-			pstmt.setString(7, member.getM_id());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getM_type());
+			pstmt.setString(7, member.getCompany());
+			pstmt.setString(8, member.getM_id());
 			re = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -92,6 +95,7 @@ public class MemberDBBean {
 		
 		return re;
 	}
+
 	
 //	회원 가입시 아이디 중복 확인할 때 사용하는 메소드
 	public int confirmID(String id) {
