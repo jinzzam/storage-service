@@ -3,25 +3,20 @@
  */
 
 function check_ok(){
-//	if(write_frm.b_name.value.length == 0){
-	if(write_frm.b_name.value.length == 0){
-		alert("작성자 이름을 써주세요");
-		write_frm.b_name.focus;
-		return;
-	}
+
 	if(write_frm.b_title.value == ""){
 		alert("제목을 써주세요");
-		write_frm.b_title.focus;
+		write_frm.title.focus;
 		return;
 	}
-	if(write_frm.b_content.value == ""){
+	if(write_frm.content.value == ""){
 		alert("내용을 써주세요");
-		write_frm.b_content.focus;
+		write_frm.content.focus;
 		return;
 	}
-	if(write_frm.b_pwd.value == ""){
+	if(write_frm.pwd.value == ""){
 		alert("비밀번호를 써주세요");
-		write_frm.b_pwd.focus;
+		write_frm.pwd.focus;
 		return;
 	}
 
@@ -30,10 +25,10 @@ function check_ok(){
 
 
 function delete_ok(){
-	if(d_frm.b_pwd.value == ""){
+	if(del_frm.pwd.value == ""){
 			alert("비밀번호를 써주세요");
-			d_frm.b_pwd.focus;
+			del_frm.pwd.focus;
 			return;
 	}
-	document.d_frm.submit();
+	document.del_frm.submit();
 };

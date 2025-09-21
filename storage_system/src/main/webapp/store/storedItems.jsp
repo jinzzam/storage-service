@@ -28,8 +28,15 @@
 				<td width="80"><input type="text" name="item_name" required="required" size="20" min="4" max="10"></td>
 			</tr>
 			<tr>
-				<td height="30">보관소 번호</td>
-				<td width="80"><input type="text" name="s_id" required="required" size="20" min="4" max="20"></td>
+			<td width="20">저장소 이름</td>
+				<td width="80">
+				<select>
+					<option>오미자 오령 저장소</option>
+					<option>24시간 셀프 스토리</option>
+					<option>길모퉁이 미니 저장소</option>
+					<option>한테크 공장형 저장소</option>
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td height="30">물품 중량</td>

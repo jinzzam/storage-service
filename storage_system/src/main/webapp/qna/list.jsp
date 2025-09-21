@@ -92,7 +92,7 @@
 					<%
 						if(fileSize > 0){
 							%>
-								<img src="./images/zip.gif">
+								<img src="../images/zip.gif">
 							<%
 						}
 					%>
@@ -109,7 +109,7 @@
 							}
 // 							들여쓰기가 적용된 시점->이미지 추가
 							%>
-								<img src="./images/AnswerLine.gif" width="16" height="16">
+								<img src="../images/AnswerLine.gif" width="16" height="16">
 							<%
 						}
 					%>
