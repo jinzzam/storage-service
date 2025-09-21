@@ -113,8 +113,6 @@ public class MemberDBBean {
 			
 			if (rs.next()) {//아이디가 일치하는 로우 존재
 				re = 1;
-			} else {//해당 아이디가 존재하지 않음 
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

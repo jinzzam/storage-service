@@ -1,8 +1,18 @@
+<%@page import="storage.StorageInfoBean"%>
+<%@page import="storage.StorageInfoDBBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<%
+	StorageInfoDBBean db = StorageInfoDBBean.getInstance();
+	
+	ArrayList<StorageInfoBean> storageList = db.storageListF();
+	String s_location, s_name;
+%>
+
 
 <html>
 <head>
@@ -12,7 +22,7 @@
 </head>
 <body>
 	<table width="500" border="1">
-		<form method="post" name="order_frm" action="order_oㅎk.jsp">
+		<form method="post" name="order_frm" action="orderOk.jsp">
 			<tr>
 				<td colspan="2" align="center">
 					<h2>보 관 하 기</h2>
@@ -22,25 +32,32 @@
 			<tr>
 				<td height="30">저 장 소</td>
 				<td width="20">
-				지역 : 
-				<select name="s_location">
-					<option>서울</option>
-					<option>대전</option>
-					<option>대구</option>
-					<option>부산</option>
-					<option>제주</option>
+				<label for="s_location"> 지역 : </label>
+				<select name="s_location" id="s_location" required="required">
+				<%
+					for(int i=0; i<storageList.size(); i++){
+						StorageInfoBean storage = storageList.get(i);
+						
+						s_location = storage.getS_location();
+						%><option><%= s_location %></option><%
+					}				
+				%>
 				</select>
 				</tr>
 				<tr>
 				</td>
 				<td width="30">이 름 </td>
 				<td width="20">
-				저장소 이름 : 
-				<select name="s_name">
-					<option>오미자 오령 저장소</option>
-					<option>24시간 셀프 스토리</option>
-					<option>길모퉁이 미니 저장소</option>
-					<option>한테크 공장형 저장소</option>
+				<label for="s_name"> 저장소 이름 : </label>
+				<select name="s_name" id="s_name" required="required">
+				<%
+					for(int i=0; i<storageList.size(); i++){
+						StorageInfoBean storage = storageList.get(i);
+						
+						s_name = storage.getS_name();
+						%><option value="<%= s_name %>"><%= s_name %></option><%
+					}				
+				%>
 				</select>
 				</td>
 			</tr>
@@ -58,7 +75,7 @@
 			</tr>
 
 				<td colspan="2" align="center">
-					<input type="submit" value="보관신청" onclick="check_ok()"> 
+					<input type="submit" value="보관신청"> 
 					<input type="reset" value="다시입력">
 					<input type="button" value="돌아가기" onclick="location.href='main.jsp'">
 				</td>

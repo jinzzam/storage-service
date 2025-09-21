@@ -1,7 +1,14 @@
+<%@page import="company.CompanyInfoBean"%>
+<%@page import="company.CompanyInfoDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	String c_id = request.getParameter("c_id");
+	CompanyInfoDBBean db = CompanyInfoDBBean.getInstance();
+	CompanyInfoBean company = db.getCompanyInfo(c_id);
 %>
 
 <html>
@@ -21,23 +28,23 @@
 			</tr>
 			<tr>
 				<td height="30">이  름</td>
-				<td width="80"><input type="text" name="name" required="required" size="20" min="4" max="10"></td>
+				<td width="80"><%= company.getName() %></td>
 			</tr>
 			<tr>
 				<td height="30">회사 번호</td>
-				<td width="80"><input type="text" name="company_id" required="required" size="20" min="4" max="20"></td>
+				<td width="80"><%= company.getCompany_id() %></td>
 			</tr>
 			<tr>
 				<td height="30">연락처</td>
-				<td width="80"><input type="text" name="tel" required="required" size="20" min="4" max="20"></td>
+				<td width="80"><%= company.getTel() %></td>
 			</tr>
 			<tr>
 				<td height="30">주  소</td>
-				<td width="80"><input type="text" name="address" required="required" size="20" min="4" max="20"></td>
+				<td width="80"><%= company.getAddress() %></td>
 			</tr>
 
 				<td colspan="2" align="center">
-					<input type="submit" value="보관신청" onclick="check_ok()"> 
+					<input type="submit" value="확인"> 
 					<input type="reset" value="다시입력">
 					<input type="button" value="돌아가기" onclick="location.href='main.jsp'">
 				</td>

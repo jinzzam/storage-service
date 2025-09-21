@@ -9,9 +9,6 @@
 <jsp:useBean class="member.MemberBean" id="member"></jsp:useBean>
 <jsp:setProperty property="*" name="member"></jsp:setProperty>
 
-<%-- <jsp:getProperty property="*" name="member"></jsp:getProperty> --%>
-
-
 <%
 	int re = db.confirmID(member.getM_id());
 	

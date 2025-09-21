@@ -76,7 +76,7 @@
 <!-- 				표현식으로 컬럼의 데이터를 출력 -->
 				<td align="center"><%= s_id %></td>
 				<td>
-					<a href="show_item.jsp?s_id=<%= s_id %>&pageNum=<%= pageNum %>&cur_id=<%= cur_id %>">
+					<a href="storageInfo.jsp?s_id=<%= s_id %>">
 						<%= s_name %>
 					</a>
 				</td>

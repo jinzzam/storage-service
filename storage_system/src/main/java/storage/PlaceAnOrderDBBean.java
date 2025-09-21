@@ -3,7 +3,6 @@ package storage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
@@ -26,7 +25,7 @@ public class PlaceAnOrderDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int number=1;
+		int number = 0;
 
 		
 		int re = -1; // insert 정상적으로 실행되면 1
@@ -122,7 +121,6 @@ public class PlaceAnOrderDBBean {
 			pstmt = conn.prepareStatement(selectSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = pstmt.executeQuery();
 			
-			
 				rs.absolute(absolutePage);	//페이지의 기준 게시글 셋팅
 				int count = 0;
 				
@@ -147,7 +145,6 @@ public class PlaceAnOrderDBBean {
 					
 					count++;
 				}
-		
 			
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -5,10 +5,10 @@ public class PaymentBean {
 	private String s_id;
 	private String company_id;
 	private String item_id;
-	private String p_basic_price;
-	private String p_period_price;
-	private String p_delivery_price;
-	private String p_total_price;
+	private int p_basic_price;
+	private int p_period_price;
+	private int p_delivery_price;
+	private int p_total_price;
 	private String p_deposit_status;
 	
 	public String getC_id() {
@@ -35,28 +35,28 @@ public class PaymentBean {
 	public void setItem_id(String item_id) {
 		this.item_id = item_id;
 	}
-	public String getP_basic_price() {
+	public int getP_basic_price() {
 		return p_basic_price;
 	}
-	public void setP_basic_price(String p_basic_price) {
+	public void setP_basic_price(int p_basic_price) {
 		this.p_basic_price = p_basic_price;
 	}
-	public String getP_period_price() {
+	public int getP_period_price() {
 		return p_period_price;
 	}
-	public void setP_period_price(String p_period_price) {
+	public void setP_period_price(int p_period_price) {
 		this.p_period_price = p_period_price;
 	}
-	public String getP_delivery_price() {
+	public int getP_delivery_price() {
 		return p_delivery_price;
 	}
-	public void setP_delivery_price(String p_delivery_price) {
+	public void setP_delivery_price(int p_delivery_price) {
 		this.p_delivery_price = p_delivery_price;
 	}
-	public String getP_total_price() {
+	public int getP_total_price() {
 		return p_total_price;
 	}
-	public void setP_total_price(String p_total_price) {
+	public void setP_total_price(int p_total_price) {
 		this.p_total_price = p_total_price;
 	}
 	public String getP_deposit_status() {
