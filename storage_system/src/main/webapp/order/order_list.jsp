@@ -49,7 +49,7 @@
 	<center>
 		<table border="1" width="800" cellspacing="0">
 			<tr height="25">
-				<td width="40" align="center">번호</td>
+				<td width="40" align="center">물품 번호</td>
 				<td width="80" align="center">첨부파일</td>
 				<td width="450" align="center">물품 이름</td>
 				<td width="120" align="center">작성자</td>

@@ -5,6 +5,7 @@ public class StorageInfoBean {
 	private String m_id;
 	private String s_name;
 	private int s_max;
+	private String s_location;
 	private String s_address;
 	private String company_id;
 	
@@ -45,6 +46,14 @@ public class StorageInfoBean {
 		return str;
 	}
 	
+	
+	
+	public String getS_location() {
+		return s_location;
+	}
+	public void setS_location(String s_location) {
+		this.s_location = s_location;
+	}
 	public String getFileName() {
 		return fileName;
 	}

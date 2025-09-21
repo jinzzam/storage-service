@@ -12,7 +12,7 @@
 </head>
 <body>
 	<table width="500" border="1">
-		<form method="post" name="order_frm" action="order_ok.jsp">
+		<form method="post" name="order_frm" action="order_oㅎk.jsp">
 			<tr>
 				<td colspan="2" align="center">
 					<h2>보 관 하 기</h2>
