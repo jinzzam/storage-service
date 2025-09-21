@@ -43,6 +43,9 @@
 	qna.setQ_title(multi.getParameter("q_title"));
 	qna.setQ_content(multi.getParameter("q_content"));
 	qna.setQ_pwd(multi.getParameter("pwd"));
+	
+	String pageNum = multi.getParameter("pageNum");
+	String id = multi.getParameter("writer_id");
 	//답변글 처리
 	//정수로 캐스팅
 	qna.setQ_id(Integer.parseInt(multi.getParameter("q_id")));
@@ -61,9 +64,11 @@
 	
 	QnaDBBean db = QnaDBBean.getInstance();
 	
+	pageNum = request.getParameter("pageNum");
+	id = request.getParameter("writer_id");
 	if(db.insertQna(qna) == 1){//글쓰기가 정상적으로 완료시
-		response.sendRedirect("list.jsp");
+		response.sendRedirect("list.jsp?id="+id+"&pageNum="+pageNum);
 	}else{//글쓰기가 실패시
-		response.sendRedirect("write.jsp");
+		response.sendRedirect("write.jsp?id="+id+"&pageNum="+pageNum);
 	}
 %>

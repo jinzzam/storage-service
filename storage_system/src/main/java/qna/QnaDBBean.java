@@ -22,11 +22,40 @@ public class QnaDBBean {
 		return ((DataSource) (new InitialContext().lookup("java:comp/env/jdbc/oracle"))).getConnection();
 	}
 	
+	public int findMaxQID() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result=-1;
+		
+		String selectIdSql = "select max(q_id) from QNA";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(selectIdSql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getInt(1)+1;
+			} 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	public int insertQna(QnaBean qna) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int number;
+		int number=1;
 		int id = qna.getQ_id();
 		int ref = qna.getQ_ref();
 		int step = qna.getQ_step();
@@ -38,7 +67,8 @@ public class QnaDBBean {
 		String selectIdSql = "select max(q_id) from QNA";
 		String insertSql = "insert into QNA(q_id, q_type, writer_id, q_title, q_content, q_pwd, q_ref, q_step, q_level"
 				              + ", fileName, fileRealName, fileSize)"
-							   + " values((select max(q_id)+1 from QNA),?,?,?,?,?,?,?,?,?,?,?)";
+							   + " values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String updateSql = "update QNA set q_step=q_step + 1 where q_ref=? and q_step > ?";
 		
 		try {
 			conn = getConnection();
@@ -55,7 +85,6 @@ public class QnaDBBean {
 //			2. 글번호를 가지고 오지 않는 경우(신규글)
 			if(id != 0) { // 글 번호를 가지고 오는 경우(답변)
 //				특정 조건에 step_1로 업데이트
-				String updateSql = "update QNA set q_step=q_step + 1 where q_ref=? and q_step > ?";
 				pstmt = conn.prepareStatement(updateSql);
 				pstmt.setInt(1, ref);
 				pstmt.setInt(2, step);
@@ -68,9 +97,6 @@ public class QnaDBBean {
 				step = 0;
 				level = 0;
 			}
-			
-			java.util.Date utilDate = qna.getQ_date(); // Or from a user input
-			Timestamp sqlTimestamp = new Timestamp(utilDate.getTime());
 			
 			pstmt = conn.prepareStatement(insertSql);
 			
@@ -212,7 +238,7 @@ public class QnaDBBean {
 			
 			sql = "select q_id, q_type, writer_id, q_title, q_content, q_date"
 				+ ", q_pwd, q_ref, q_step, q_level"
-				+ ", fileName, fileSize from QNA where q_id=?";
+				+ ", fileName, fileRealName, fileSize from QNA where q_id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, qid);
 			rs = pstmt.executeQuery();
@@ -220,7 +246,7 @@ public class QnaDBBean {
 			if(rs.next()) {
 				qna = new QnaBean();
 				
-				qna.setQ_id(rs.getInt(1));
+				qna.setQ_id(qid);
 				qna.setQ_type(rs.getString(2));
 				qna.setWriter_id(rs.getString(3));
 				qna.setQ_title(rs.getString(4));

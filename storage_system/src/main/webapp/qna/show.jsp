@@ -15,8 +15,9 @@
 <body>
 <%
 	String pageNum=request.getParameter("pageNum");
-	
 	int q_id = Integer.parseInt(request.getParameter("q_id"));
+	String writer_id = request.getParameter("id");
+	
 	QnaDBBean db = QnaDBBean.getInstance();
 	QnaBean qna = db.getQna(q_id);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -27,13 +28,13 @@
 		<table border="1" width="800" cellspacing="0">
 			<tr height="25">
 				<td width="20" align="center">글번호</td>
-				<td width="40" align="center"><%= qna.getQ_id() %></td>
+				<td width="40" align="center"><%= q_id %></td>
 				<td width="20" align="center">구분</td>
 				<td width="40" align="center"><%= qna.getQ_type() %></td>
 			</tr>
 			<tr height="25">
 				<td width="20" align="center">작성자</td>
-				<td width="40" align="center"><%= db.getWriterName(qna.getWriter_id()) %></td>
+				<td width="40" align="center"><%= db.getWriterName(writer_id) %></td>
 				<td width="20" align="center">작성일</td>
 				<td width="40" align="center"><%= sdf.format(qna.getQ_date()) %></td>
 			</tr>
@@ -66,12 +67,13 @@
 				<td width="80" align="left"><%= qna.getQ_content()%></td>
 			</tr>
 			<tr height="25" align="right" colspan="4">
-				<td width="40" align="right"><input type="button" value="글수정" onclick="location.href='edit.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
-				<td width="40" align="right"><input type="button" value="글삭제" onclick="location.href='delete.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
-				<td width="40" align="right"><input type="button" value="답변글" onclick="location.href='write.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
-				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'"></td>
+				<td width="40" align="right"><input type="button" value="글수정" onclick="location.href='edit.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
+				<td width="40" align="right"><input type="button" value="글삭제" onclick="location.href='delete.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
+				<td width="40" align="right"><input type="button" value="답변글" onclick="location.href='write.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
+				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&qid=<%= writer_id %>'"></td>
 			</tr>
 		</table>
 	</center>
 </body>
 </html>
+<%-- <% response.sendRedirect(list.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&qid=<%= writer_id %>') %> --%>

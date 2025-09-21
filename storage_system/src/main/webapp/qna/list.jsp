@@ -1,3 +1,5 @@
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberDBBean"%>
 <%@page import="qna.QnaDBBean"%>
 <%@page import="qna.QnaBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -9,22 +11,27 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <%
-	out.print("@# pageNum=>"+request.getParameter("pageNum"));
 
-	String pageNum=request.getParameter("pageNum");
-	String writer_id = request.getParameter("id");
+	String pageNum = request.getParameter("pageNum");
+	String writer_id = request.getParameter("qid");
+	
+	out.print("@# pageNum=>"+request.getParameter("pageNum"));
 	
 	if(pageNum == null){
 		pageNum="1";
 	}
 	
+	MemberDBBean memDB = MemberDBBean.getInstance();
 	QnaDBBean db = QnaDBBean.getInstance();
+	
 //	호출된 메소드의 반환 타입으로 받아주면 됨
 	ArrayList<QnaBean> qnaList = db.qnaList(pageNum);
 	int q_id=1, q_level=0, fileSize=0;
 	String q_type, q_title;
 	Timestamp q_date;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	MemberBean member = memDB.getMember(writer_id);
 	
 %>
 <!-- *.정렬 기준 -->
@@ -43,7 +50,7 @@
 			<tr>
 				<td align="right">
 <%-- 					<a href="write.jsp">글 쓰 기</a> --%>
-					<a href="write.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>">글 쓰 기</a>
+					<a href="write.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>&q_id=<%= db.findMaxQID()%>">글 쓰 기</a>
 				</td>
 			</tr>
 		</table>
@@ -65,7 +72,6 @@
 					
 					q_id = qna.getQ_id();
 					q_type= qna.getQ_type();
-					writer_id = qna.getWriter_id();
 					q_title = qna.getQ_title();
 					q_date = qna.getQ_date();
 					q_level = qna.getQ_level();
@@ -105,7 +111,7 @@
 					%>
 <!-- 					글번호를 가지고 글내용 보기 페이지로 이동 -->
 <%-- 					<a href="show.jsp?b_id=<%= b_id %>"> --%>
-					<a href="show.jsp?q_id=<%= q_id %>&pageNum=<%= pageNum %>">
+					<a href="show.jsp?q_id=<%= q_id %>&pageNum=<%= pageNum %>&id=<%= writer_id %>">
 						<%= q_title %>
 					</a>
 				</td>

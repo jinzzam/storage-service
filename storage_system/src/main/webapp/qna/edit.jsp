@@ -1,5 +1,3 @@
-<%@page import="magic.board.BoardBean"%>
-<%@page import="magic.board.BoardDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -7,6 +5,7 @@
 %>
 <%
 	String pageNum=request.getParameter("pageNum");
+	String writer_id = request.getParameter("id");
 	int b_id=0, b_ref=0, b_step=0, b_level=0;
 	String b_title="", b_email="", b_name="";
 	

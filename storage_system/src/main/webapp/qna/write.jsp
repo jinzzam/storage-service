@@ -11,8 +11,12 @@
 	
 	String pageNum=request.getParameter("pageNum");
 	String writer_id = request.getParameter("id");
+	int q_id=0;
+	if(request.getParameter("q_id") != null){
+		q_id = Integer.parseInt(request.getParameter("q_id"));
+	}
 	
-	int q_id=0, q_ref=0, q_step=0, q_level=0;
+	int q_ref=0, q_step=0, q_level=0;
 	String q_title="", q_name="", q_pwd="";
 	String email="";
 	
@@ -21,8 +25,7 @@
 
 	
 	//답변글(show.jsp 에서 글번호를 가지고 옴)
-	if(request.getParameter("q_id") != null){	//casting 오류를 막기 위함
-		q_id = Integer.parseInt(request.getParameter("q_id")) ;	
+	if(q_id != 0){	//casting 오류를 막기 위함
 		q_ref = q_id;
 	}
 	
@@ -49,13 +52,14 @@
 <body>
 	<center>
 		<h1>글 올 리 기</h1><br>
-		<form method="post" action="write_ok.jsp" name="write_frm" enctype="multipart/form-data">
+		<form method="post" action="write_ok.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>" name="write_frm" enctype="multipart/form-data">
 <!-- 			화면에 없는 것을 전달할 때 hidden 사용 -->
 			<input type="hidden" name="q_id" value="<%= q_id %>">
 			<input type="hidden" name="q_ref" value="<%= q_ref %>">
 			<input type="hidden" name="q_step" value="<%= q_step %>">
 			<input type="hidden" name="q_level" value="<%= q_level %>">
 			<input type="hidden" name="writer_id" value="<%= writer_id %>">
+			<input type="hidden" name="pageNum" value="<%= pageNum %>">
 			<table>
 				<tr height="30">
 					<td width="80">작성자</td>
@@ -103,7 +107,8 @@
 					<td colspan="4">
 						<input type="submit" value="글쓰기" onclick="check_ok()">&nbsp;
 						<input type="reset" value="다시 작성">&nbsp;
-						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'">
+						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>'">
+						<input type="button" onclick=send>
 					</td>
 				</tr>
 			</table>
