@@ -34,7 +34,7 @@
 			</tr>
 			<tr height="25">
 				<td width="20" align="center">작성자</td>
-				<td width="40" align="center"><%= db.getWriterName(writer_id) %></td>
+				<td width="40" align="center"><%= db.getWriterName(qna.getWriter_id()) %></td>
 				<td width="20" align="center">작성일</td>
 				<td width="40" align="center"><%= sdf.format(qna.getQ_date()) %></td>
 			</tr>
@@ -70,7 +70,7 @@
 				<td width="40" align="right"><input type="button" value="글수정" onclick="location.href='edit.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
 				<td width="40" align="right"><input type="button" value="글삭제" onclick="location.href='delete.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
 				<td width="40" align="right"><input type="button" value="답변글" onclick="location.href='write.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
-				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&qid=<%= writer_id %>'"></td>
+				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&cur_id=<%= writer_id %>'"></td>
 			</tr>
 		</table>
 	</center>

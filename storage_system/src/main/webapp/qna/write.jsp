@@ -1,3 +1,5 @@
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberDBBean"%>
 <%@page import="qna.QnaBean"%>
 <%@page import="qna.QnaDBBean"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -17,11 +19,12 @@
 	}
 	
 	int q_ref=0, q_step=0, q_level=0;
-	String q_title="", q_name="", q_pwd="";
-	String email="";
+	String q_title="", q_pwd="", email="", writer_name="";
 	
 	QnaDBBean db = QnaDBBean.getInstance(); 
+	MemberDBBean memberDB = MemberDBBean.getInstance();
 	QnaBean qna = db.getQna(q_id);
+	MemberBean mem = memberDB.getMember(writer_id);
 
 	
 	//답변글(show.jsp 에서 글번호를 가지고 옴)
@@ -37,8 +40,8 @@
 		q_title = qna.getQ_title();
 		q_pwd = qna.getQ_pwd();
 	}
-	q_name = db.getWriterName(writer_id);
-	email = db.getWriterEmail(writer_id);
+	writer_name = mem.getM_name();
+	email = mem.getEmail();
 	
 %>
 <!-- select b_id, b_name, b_email, b_title, b_content, b_date, b_hit, b_pwd, b_ip from boardT where b_id=? -->
@@ -65,7 +68,7 @@
 					<td width="80">작성자</td>
 					<td width="140">
 <!-- 					maxlength : 화면 단에서 데이터베이스 오류를 미리 방지 -->
-						<%= q_name %>
+						<%= writer_name %>
 					</td>
 					
 				</tr>
@@ -107,7 +110,7 @@
 					<td colspan="4">
 						<input type="submit" value="글쓰기" onclick="check_ok()">&nbsp;
 						<input type="reset" value="다시 작성">&nbsp;
-						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>'">
+						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&cur_id=<%= writer_id %>'">
 						<input type="button" onclick=send>
 					</td>
 				</tr>

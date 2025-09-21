@@ -33,7 +33,7 @@
 			<tr>
 				<td align="center">
 					<input type="submit" value="로그아웃">
-					<input type="button" value="qna" onclick="location='../qna/list.jsp?qid=<%= id %>'">
+					<input type="button" value="qna" onclick="location='../qna/list.jsp?cur_id=<%= id %>'">
 					<input type="button" value="회원정보변경" onclick="location='memberUpdate.jsp?id=<%= id %>'">
 				</td>
 			</tr>

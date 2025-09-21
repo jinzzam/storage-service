@@ -142,7 +142,7 @@ public class QnaDBBean {
         //+ ", fileName, fileRealName, fileSize
 		String selectSql = "select q_id, q_type, writer_id, q_title, q_content, q_date"
 						 + ", q_pwd, q_ref, q_step, q_level"
-						 + ", fileName, fileSize from QNA"
+						 + ", fileName, fileRealName, fileSize from QNA"
 						 + " order by q_ref desc, q_step asc";
 		String countSql = "select count(q_id) from QNA";
 		ArrayList<QnaBean> qnaList = new ArrayList<QnaBean>();
@@ -195,6 +195,9 @@ public class QnaDBBean {
 					qna.setQ_ref(rs.getInt(8));
 					qna.setQ_step(rs.getInt(9));
 					qna.setQ_level(rs.getInt(10));
+					qna.setFileName(rs.getString(11));
+					qna.setFileRealName(rs.getString(12));
+					qna.setFileSize(rs.getInt(13));
 //					여기까지가 1행을 가져와서 저장
 					
 //					행의 데이터를 ArrayList 에 저장
@@ -246,7 +249,7 @@ public class QnaDBBean {
 			if(rs.next()) {
 				qna = new QnaBean();
 				
-				qna.setQ_id(qid);
+				qna.setQ_id(rs.getInt(1));
 				qna.setQ_type(rs.getString(2));
 				qna.setWriter_id(rs.getString(3));
 				qna.setQ_title(rs.getString(4));
