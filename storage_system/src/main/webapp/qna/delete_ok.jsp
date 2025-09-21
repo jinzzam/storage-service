@@ -1,3 +1,5 @@
+<%@page import="qna.QnaBean"%>
+<%@page import="qna.QnaDBBean"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,17 +11,18 @@
 
 <%
 	String pageNum=request.getParameter("pageNum");
+	String cur_id = (String) session.getAttribute("cur_id");
 
-	int b_id = Integer.parseInt(request.getParameter("b_id"));
-	String b_pwd = request.getParameter("b_pwd");
+	int q_id = Integer.parseInt(request.getParameter("q_id"));
+	String pwd = request.getParameter("pwd");
 
-	BoardDBBean db = BoardDBBean.getInstance();
+	QnaDBBean db = QnaDBBean.getInstance();
 	
-	BoardBean board = db.getBoard(b_id, false);
-	String fName = board.getB_fname();
-	String up ="C:\\dev\\work_java\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\magicWeb_250912\\upload";
+	QnaBean qna= db.getQna(q_id);
+	String fName = qna.getFileName();
+	String up ="C:\\dev\\storage-service\\storage-service\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\storage_system\\upload";
 	
-	int re = db.deleteBoard(b_id, b_pwd);
+	int re = db.deleteQna(q_id, pwd);
 	
 	if(re == 1){	//게시글이 정상적으로 삭제되었을 때
 		//파일이 있으면 파일도 삭제하겠다.

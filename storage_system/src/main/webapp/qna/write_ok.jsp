@@ -67,8 +67,8 @@
 	pageNum = request.getParameter("pageNum");
 	id = request.getParameter("id");
 	if(db.insertQna(qna) == 1){//글쓰기가 정상적으로 완료시
-		response.sendRedirect("list.jsp?cur_id="+id+"&pageNum="+pageNum);
+		response.sendRedirect("list.jsp?pageNum="+pageNum);
 	}else{//글쓰기가 실패시
-		response.sendRedirect("write.jsp?id="+id+"&pageNum="+pageNum);
+		response.sendRedirect("write.jsp?pageNum="+pageNum);
 	}
 %>

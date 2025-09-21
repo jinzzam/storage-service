@@ -5,9 +5,9 @@
 %>
 <%
 	String pageNum=request.getParameter("pageNum");
-	String writer_id = request.getParameter("id");
+	int q_id = Integer.parseInt(request.getParameter("q_id"));
+	String cur_id = (String) session.getAttribute("cur_id");
 
-	int b_id = Integer.parseInt(request.getParameter("b_id"));
 %>
 <html>
 <head>
@@ -16,12 +16,12 @@
 <script type="text/javascript" src="board.js"></script>
 </head>
 <body>
-	<form method="post" action="delete_ok.jsp?b_id=<%= b_id %>&pageNum=<%= pageNum %>" name="d_frm">
+	<form method="post" action="delete_ok.jsp?q_id=<%= q_id %>&pageNum=<%= pageNum %>" name="del_frm">
 		<h1>글 삭 제 하 기</h1>
 		<h3>
 			>> 암호를 입력하세요. <<
 		</h3><br>
-		암 호 &nbsp; <input type="password" name="b_pwd" size="12" maxlength="12">
+		암 호 &nbsp; <input type="password" name="pwd" size="12" maxlength="12">
 		<input type="submit" value="글삭제" onclick="delete_ok()">
 		&nbsp;&nbsp;&nbsp;
 		<input type="reset" value="다시 작성">
