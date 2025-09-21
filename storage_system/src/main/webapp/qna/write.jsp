@@ -10,9 +10,15 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <%
-	
+	String cur_id = (String) session.getAttribute("cur_id");
+//**Add a null check to handle a non-logged-in user**
+	if (cur_id == null || cur_id.isEmpty()) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+
 	String pageNum=request.getParameter("pageNum");
-	String writer_id = request.getParameter("id");
+	
 	int q_id=0;
 	if(request.getParameter("q_id") != null){
 		q_id = Integer.parseInt(request.getParameter("q_id"));
@@ -24,8 +30,17 @@
 	QnaDBBean db = QnaDBBean.getInstance(); 
 	MemberDBBean memberDB = MemberDBBean.getInstance();
 	QnaBean qna = db.getQna(q_id);
-	MemberBean mem = memberDB.getMember(writer_id);
+	MemberBean mem = memberDB.getMember(cur_id);
+	
+	// You might not need this second null check if the first one is effective
+    // However, it's good practice for safety
+    if (mem == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 
+	writer_name = mem.getM_name();
+	email = mem.getEmail();
 	
 	//답변글(show.jsp 에서 글번호를 가지고 옴)
 	if(q_id != 0){	//casting 오류를 막기 위함
@@ -40,8 +55,6 @@
 		q_title = qna.getQ_title();
 		q_pwd = qna.getQ_pwd();
 	}
-	writer_name = mem.getM_name();
-	email = mem.getEmail();
 	
 %>
 <!-- select b_id, b_name, b_email, b_title, b_content, b_date, b_hit, b_pwd, b_ip from boardT where b_id=? -->
@@ -55,13 +68,13 @@
 <body>
 	<center>
 		<h1>글 올 리 기</h1><br>
-		<form method="post" action="write_ok.jsp?pageNum=<%= pageNum %>&id=<%= writer_id %>" name="write_frm" enctype="multipart/form-data">
+		<form method="post" action="write_ok.jsp?pageNum=<%= pageNum %>&id=<%= cur_id %>" name="write_frm" enctype="multipart/form-data">
 <!-- 			화면에 없는 것을 전달할 때 hidden 사용 -->
 			<input type="hidden" name="q_id" value="<%= q_id %>">
 			<input type="hidden" name="q_ref" value="<%= q_ref %>">
 			<input type="hidden" name="q_step" value="<%= q_step %>">
 			<input type="hidden" name="q_level" value="<%= q_level %>">
-			<input type="hidden" name="writer_id" value="<%= writer_id %>">
+			<input type="hidden" name="writer_id" value="<%= cur_id %>">
 			<input type="hidden" name="pageNum" value="<%= pageNum %>">
 			<table>
 				<tr height="30">
@@ -110,7 +123,7 @@
 					<td colspan="4">
 						<input type="submit" value="글쓰기" onclick="check_ok()">&nbsp;
 						<input type="reset" value="다시 작성">&nbsp;
-						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&cur_id=<%= writer_id %>'">
+						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&cur_id=<%= cur_id %>'">
 						<input type="button" onclick=send>
 					</td>
 				</tr>

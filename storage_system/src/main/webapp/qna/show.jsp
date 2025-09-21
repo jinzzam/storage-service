@@ -67,10 +67,10 @@
 				<td width="80" align="left"><%= qna.getQ_content()%></td>
 			</tr>
 			<tr height="25" align="right" colspan="4">
-				<td width="40" align="right"><input type="button" value="글수정" onclick="location.href='edit.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
-				<td width="40" align="right"><input type="button" value="글삭제" onclick="location.href='delete.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
-				<td width="40" align="right"><input type="button" value="답변글" onclick="location.href='write.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>&id=<%= writer_id %>'"></td>
-				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>&cur_id=<%= writer_id %>'"></td>
+				<td width="40" align="right"><input type="button" value="글수정" onclick="location.href='edit.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
+				<td width="40" align="right"><input type="button" value="글삭제" onclick="location.href='delete.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
+				<td width="40" align="right"><input type="button" value="답변글" onclick="location.href='write.jsp?q_id=<%= qna.getQ_id()%>&pageNum=<%= pageNum %>'"></td>
+				<td width="40" align="right"><input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'"></td>
 			</tr>
 		</table>
 	</center>

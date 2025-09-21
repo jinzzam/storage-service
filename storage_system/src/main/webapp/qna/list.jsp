@@ -13,7 +13,7 @@
 <%
 
 	String pageNum = request.getParameter("pageNum");
-	String cur_id = request.getParameter("cur_id");
+	String cur_id = (String) session.getAttribute("cur_id");
 	
 	out.print("@# pageNum=>"+request.getParameter("pageNum"));
 	
@@ -32,17 +32,9 @@
 	Timestamp q_date;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
-	MemberBean mem = memDB.getMember(cur_id);
 	
-	// Add a null check
-    if (mem == null) {
-        // Handle the case where the user is not logged in or the ID is invalid
-        // Redirect to login page or display an error
-        response.sendRedirect("login.jsp");
-        return;
-    }
-    String writer_name = mem.getM_name();
-    String email = mem.getEmail();
+//     String writer_name = memDB.getMember(id)
+//     String email = mem.getEmail();
 	
 %>
 <!-- *.정렬 기준 -->
