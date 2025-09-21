@@ -77,6 +77,7 @@
 				>
 <!-- 				표현식으로 컬럼의 데이터를 출력 -->
 				<td align="center"><%= q_id %></td>
+				<td align="cetner">구분</td>
 				<td>
 					<%
 						if(fileSize > 0){

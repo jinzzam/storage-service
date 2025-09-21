@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
@@ -35,9 +36,9 @@ public class QnaDBBean {
 		int re = -1; // insert 정상적으로 실행되면 1
 //		글번호 최대값+1을 구함 : null 일 때는 1, 아니면 +1
 		String selectIdSql = "select max(q_id) from QNA";
-		String insertSql = "insert into QNA(q_id, q_type, writer_id, q_title, q_content, q_date, q_pwd, q_ref, q_step, q_level"
+		String insertSql = "insert into QNA(q_id, q_type, writer_id, q_title, q_content, q_pwd, q_ref, q_step, q_level"
 				              + ", fileName, fileRealName, fileSize)"
-							   + " values((select max(q_id)+1 from QNA),?,?,?,?,?,?,?,?,?,?,?,?)";
+							   + " values((select max(q_id)+1 from QNA),?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			conn = getConnection();
@@ -68,12 +69,16 @@ public class QnaDBBean {
 				level = 0;
 			}
 			
+			java.util.Date utilDate = qna.getQ_date(); // Or from a user input
+			Timestamp sqlTimestamp = new Timestamp(utilDate.getTime());
+			
 			pstmt = conn.prepareStatement(insertSql);
-			pstmt.setString(1, qna.getQ_type());
-			pstmt.setString(2, writer_id);
-			pstmt.setString(3, qna.getQ_title());
-			pstmt.setString(4, qna.getQ_content());
-			pstmt.setTimestamp(5, qna.getQ_date());
+			
+			pstmt.setInt(1, number);
+			pstmt.setString(2, qna.getQ_type());
+			pstmt.setString(3, writer_id);
+			pstmt.setString(4, qna.getQ_title());
+			pstmt.setString(5, qna.getQ_content());
 			pstmt.setString(6, qna.getQ_pwd());
 			pstmt.setInt(7, ref);
 			pstmt.setInt(8, step);
@@ -109,12 +114,14 @@ public class QnaDBBean {
 		
 		//q_id, q_type, writer_id, q_title, q_content, q_date, q_pwd, q_ref, q_step, q_level"
         //+ ", fileName, fileRealName, fileSize
-		String selectSql = "select q_id, q_type, writer_id, q_title, q_content, to_char(q_date, 'YYYY-MM-DD HH24:MI')"
+		String selectSql = "select q_id, q_type, writer_id, q_title, q_content, q_date"
 						 + ", q_pwd, q_ref, q_step, q_level"
 						 + ", fileName, fileSize from QNA"
 						 + " order by q_ref desc, q_step asc";
 		String countSql = "select count(q_id) from QNA";
 		ArrayList<QnaBean> qnaList = new ArrayList<QnaBean>();
+		
+		
 		
 		try {
 			conn = getConnection();
@@ -157,8 +164,7 @@ public class QnaDBBean {
 					qna.setWriter_id(rs.getString(3));
 					qna.setQ_title(rs.getString(4));
 					qna.setQ_content(rs.getString(5));
-					Timestamp q_date_from_db=rs.getTimestamp(6);
-					qna.setQ_date(q_date_from_db);
+					qna.setQ_date(rs.getTimestamp(6));
 					qna.setQ_pwd(rs.getString(7));
 					qna.setQ_ref(rs.getInt(8));
 					qna.setQ_step(rs.getInt(9));
@@ -204,7 +210,7 @@ public class QnaDBBean {
 			conn = getConnection();
 			
 			
-			sql = "select q_id, q_type, writer_id, q_title, q_content, to_char(q_date, 'YYYY-MM-DD HH24:MI')"
+			sql = "select q_id, q_type, writer_id, q_title, q_content, q_date"
 				+ ", q_pwd, q_ref, q_step, q_level"
 				+ ", fileName, fileSize from QNA where q_id=?";
 			pstmt = conn.prepareStatement(sql);

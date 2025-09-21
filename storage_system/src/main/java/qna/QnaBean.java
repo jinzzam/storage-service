@@ -1,5 +1,6 @@
 package qna;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class QnaBean {
@@ -50,6 +51,14 @@ public class QnaBean {
 		
 		return str;
 	}
+	
+	
+	public Timestamp getQ_date() {
+		return q_date;
+	}
+	public void setQ_date(Timestamp q_date) {
+		this.q_date = q_date;
+	}
 	public int getQ_id() {
 		return q_id;
 	}
@@ -80,12 +89,7 @@ public class QnaBean {
 	public void setQ_content(String q_content) {
 		this.q_content = q_content;
 	}
-	public Timestamp getQ_date() {
-		return q_date;
-	}
-	public void setQ_date(Timestamp q_date) {
-		this.q_date = q_date;
-	}
+	
 	public String getQ_pwd() {
 		return q_pwd;
 	}
