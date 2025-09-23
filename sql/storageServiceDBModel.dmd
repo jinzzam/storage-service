@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="storageServiceDBModel" id="ACF7A773-B22F-BC54-A0B5-91428A578D7E" version="3.5">
+<createdBy>jin</createdBy>
+<createdTime>2025-09-19 22:45:00 UTC</createdTime>
+<ownerDesignName>storageServiceDBModel</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>ACF7A773-B22F-BC54-A0B5-91428A578D7E</designId>
+</OSDM_Design>
