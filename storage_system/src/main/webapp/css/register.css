@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+/* style.css */
+
+/* 전체 페이지 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 카드 컨테이너 */
+.card-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* 크게 보여주는 카드 컨테이너 */
+.card-container.large {
+    max-width: 800px; /* 최대 너비를 800px로 확장 */
+}
+
+/* 폼 카드 스타일 */
+.form-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 폼 제목 */
+.form-title {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* 폼 부제목 */
+.form-subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #888;
+    font-size: 14px;
+}
+
+/* 폼 그룹 (라벨+입력 필드) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #666;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group label {
+    display: inline-flex; /* 라벨과 라디오 버튼을 한 줄에 표시 */
+    align-items: center;
+    margin-right: 20px;
+    font-weight: normal; /* 라벨의 폰트 두께를 기본으로 설정 */
+}
+
+.radio-group input[type="radio"] {
+    width: auto; /* 기본 라디오 버튼 크기 유지 */
+    margin-right: 5px;
+}
+
+/* 버튼 그룹 */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* 모든 버튼 기본 스타일 */
+.button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px); /* 호버 시 약간 위로 올라가는 효과 */
+}
+
+/* 주 버튼 (등록) */
+.button-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-primary:hover {
+    background-color: #0056b3;
+}
+
+/* 보조 버튼 (다시입력) */
+.button-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.button-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 외곽선 버튼 (돌아가기) */
+.button-outline {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.button-outline:hover {
+    background-color: #f8f9fa;
+    color: #5a6268;
+}
+
+/* style.css */
+
+/* (이전 코드에 있던 모든 스타일은 여기에 그대로 유지됩니다.) */
+
+/* --- 추가 스타일 --- */
+
+/* 로그인 페이지 버튼 정렬 */
+.login-buttons {
+    justify-content: space-between; /* 버튼들을 양쪽으로 분산 정렬 */
+}
+
+/* 수정 불가능한 텍스트 표시 스타일 */
+.form-text-display {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #e9ecef; /* 회색 배경으로 수정 불가능함을 시각적으로 표시 */
+    color: #6c757d;
+    font-size: 16px;
+    margin-bottom: 0;
+}

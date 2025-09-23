@@ -12,22 +12,20 @@
 	StorageInfoDBBean storageDB = StorageInfoDBBean.getInstance();
 	StoredItemsDBBean itemDB = StoredItemsDBBean.getInstance();
 	
-// 	PlaceAnOrderBean order = new PlaceAnOrderBean();
-// 	StorageInfoBean storage = new StorageInfoBean();
-// 	StoredItemsBean item = new StoredItemsBean();
 	
 	String cur_id = (String) session.getAttribute("cur_id");
 %>
-<jsp:useBean class="storage.PlaceAnOrderBean" id="order"></jsp:useBean>
-<jsp:setProperty property="*" name="order"></jsp:setProperty>
-<jsp:useBean class="storage.StorageInfoBean" id="storage"></jsp:useBean>
-<jsp:setProperty property="*" name="storage"></jsp:setProperty>
-<jsp:useBean class="storage.StoredItemsBean" id="item"></jsp:useBean>
-<jsp:setProperty property="*" name="item"></jsp:setProperty>
+<%-- <jsp:useBean class="storage.PlaceAnOrderBean" id="order"></jsp:useBean> --%>
+<%-- <jsp:setProperty property="*" name="order"></jsp:setProperty> --%>
+<%-- <jsp:useBean class="storage.StorageInfoBean" id="storage"></jsp:useBean> --%>
+<%-- <jsp:setProperty property="*" name="storage"></jsp:setProperty> --%>
+<%-- <jsp:useBean class="storage.StoredItemsBean" id="item"></jsp:useBean> --%>
+<%-- <jsp:setProperty property="*" name="item"></jsp:setProperty> --%>
 <%
 	String order_id;
 	String orderer_id = cur_id;
 	String s_id = request.getParameter("s_id");
+	System.out.println("@@@## s_id=>"+s_id);
 	String item_id;
 	String item_name = request.getParameter("item_name");
 	int item_weight = Integer.parseInt(request.getParameter("item_weight"));
@@ -35,6 +33,7 @@
 	String ordered_period = request.getParameter("ordered_period");
 	String confirm_status="0";
 
+	StorageInfoBean storage = storageDB.getStorage(s_id);
 	int remain_weight = storage.getS_max();
 	if(remain_weight < item_weight){
 		%>
@@ -44,6 +43,8 @@
 			</script>
 		<%
 	}
+	PlaceAnOrderBean order = new PlaceAnOrderBean();
+	StoredItemsBean item = new StoredItemsBean();
 	
 	//PlaceAnOrderDBBean
 	//StorageInfoBean

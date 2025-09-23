@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/* style.css */
+
+/* 전체 페이지 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    
+    /* Grid를 사용한 중앙 정렬 */
+    display: grid; 
+    place-items: center; 
+    min-height: 100vh;
+}
+
+/* 카드 컨테이너 */
+.card-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* 크게 보여주는 카드 컨테이너 */
+.card-container.large {
+    max-width: 800px;
+}
+
+/* 폼 카드 스타일 */
+.form-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 폼 제목 */
+.form-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* 폼 그룹 (라벨+입력 필드) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #666;
+    font-size: 18px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 18px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* 버튼 그룹 */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+/* 모든 버튼 기본 스타일 */
+.button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+/* 주 버튼 (보관신청) */
+.button-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-primary:hover {
+    background-color: #0056b3;
+}
+
+/* 보조 버튼 (다시입력) */
+.button-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.button-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 외곽선 버튼 (돌아가기) */
+.button-outline {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.button-outline:hover {
+    background-color: #f8f9fa;
+    color: #5a6268;
+}
